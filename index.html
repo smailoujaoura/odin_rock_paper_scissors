@@ -19,9 +19,12 @@
 				<div class="head1">Choose Your Weapon!</div>
 				<div class="head2">Click on rock, paper, or scissors to play</div>
 				<div class="actions">
-					<button id="rock">Rock 🪨</button>
-					<button id="paper">Paper 📄</button>
-					<button id="scissors">Scissors ✂️</button>
+					<button id="rock">Rock</button>
+					<button id="paper">Paper</button>
+					<button id="scissors">Scissors</button>
+				</div>
+				<div>
+					<p id="result">Tie</p>
 				</div>
 			</section>
 			<section class="results">
@@ -30,19 +33,19 @@
 					<div class="scores">
 						<div class="player">
 							<p>Your Score</p>
-							<p class="score">0</p>
+							<p id="player-score">0</p>
 						</div>
 						<div class="computer">
 							<p>Computer Score</p>
-							<p class="score">0</p>
+							<p id="comp-score">1</p>
 						</div>
 					</div>
 					<div class="rounds">
 						<p>Rounds Played</p>
-						<p class="rounds-counter">0</p>
+						<p id="rounds-counter">0</p>
 					</div>
 					<div>
-						<button class="reset">Reset Game</button>
+						<button class="reset" onclick="resetResults()">Reset Game</button>
 					</div>
 				</div>
 			</section>
