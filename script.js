@@ -16,10 +16,12 @@
 
 let userWins = 0;
 let compWins = 0;
+let ties = 0;
 let rounds = 0;
 
 let playerScore;
 let computerScore;
+let tiesScore;
 let totalRounds;
 
 let rock;
@@ -31,6 +33,7 @@ let result;
 document.addEventListener('DOMContentLoaded', () => {
 	playerScore = document.getElementById('player-score');
 	computerScore = document.getElementById('comp-score');
+	tiesScore = document.getElementById('ties-score')
 	totalRounds = document.getElementById('rounds-counter');
 
 	result = document.getElementById('result');
@@ -79,11 +82,15 @@ function startRound(playerOption) {
 			break;
 		case 'computer':
 			compWins++;
+			break;
+		case 'tie':
+			ties++;
 	}
 	totalRounds.textContent = rounds;
+	result.textContent = winner;
+	tiesScore.textContent = ties;
 	playerScore.textContent = userWins;
 	computerScore.textContent = compWins;
-	result.textContent = winner;
 }
 
 function randomRange(lower, upper) {
@@ -109,9 +116,11 @@ function resetResults() {
 	userWins = 0;
 	compWins = 0;
 	rounds = 0;
+	ties = 0;
 
 	playerScore.textContent = '0';
 	computerScore.textContent = '0';
 	totalRounds.textContent = '0';
+	tiesScore.textContent = '0';
 	result.textContent = 'Tie';
 }
