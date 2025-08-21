@@ -1,19 +1,3 @@
-// let e1 = 0
-// let e2 = 0
-// let e3 = 0
-// let tries = 3_000_000;
-// for (let i = 0; i < tries; i++)
-// {
-// 	let random = randomRange(1, 3);
-// 	if (random == 1)
-// 		e1++
-// 	else if (random == 2)
-// 		e2++;
-// 	else if (random == 3)
-// 		e3++;
-// }
-// console.log(`P1: ${e1 / tries}\n P2: ${e2 / tries}\n P3: ${e3 / tries}`) // probability of getting 1, 2, or 3 is uniform 1/3 for each
-
 let userWins = 0;
 let compWins = 0;
 let ties = 0;
@@ -30,7 +14,14 @@ let scissors;
 
 let result;
 
+let main;
+let announcement;
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
+	main = document.querySelector("main");
+
 	playerScore = document.getElementById('player-score');
 	computerScore = document.getElementById('comp-score');
 	tiesScore = document.getElementById('ties-score')
@@ -51,32 +42,49 @@ function findWinner(playerOption, computerOption)
 {
 	if (playerOption === computerOption)
 		return 'tie';
-	if (computerOption === 'rock')
-	{
+	if (computerOption === 'rock') {
 		if (playerOption === 'paper')
 			return 'player';
 		return 'computer';
 	}
-	else if (computerOption === 'paper')
-	{
+	else if (computerOption === 'paper') {
 		if (playerOption === 'scissors')
 			return 'player';
 		return 'computer';
 	}
-	else if (computerOption === 'scissors')
-	{
+	else if (computerOption === 'scissors') {
 		if (playerOption == 'rock')
 			return 'player';
 		return 'computer';
 	}
 }
 
+function announceWinner() {
+	announcement = document.createElement('div');
+	if (userWins > compWins) {
+		announcement.textContent = "You won!";
+		announcement.setAttribute("style", "color: green; font-size: 24px")
+	}
+	else if (userWins < compWins) {
+		announcement.textContent = "Game lost!";
+		announcement.setAttribute("style", "color: red; font-size: 24px")
+	}
+	else {
+		announcement.textContent = "It's a tie.";
+		announcement.setAttribute("style", "color: lightskyblue; font-size: 24px")
+	}
+	announcement.setAttribute("style", announcement.getAttribute("style") 
+		+ "; border: 1px solid #282828; padding: 10px; border-radius: 20px;")
+	main.insertBefore(announcement, main.querySelector(".results"));
+}
+
 function startRound(playerOption) {
+	if (rounds === 5)
+		resetResults();
 	let winner = findWinner(playerOption, randomOption());
 	rounds++;
 
-	switch (winner)
-	{
+	switch (winner) {
 		case 'player':
 			userWins++;
 			break;
@@ -87,10 +95,13 @@ function startRound(playerOption) {
 			ties++;
 	}
 	totalRounds.textContent = rounds;
-	result.textContent = winner;
+	result.textContent = winner.toUpperCase();
 	tiesScore.textContent = ties;
 	playerScore.textContent = userWins;
 	computerScore.textContent = compWins;
+
+	if (rounds === 5)
+		announceWinner();
 }
 
 function randomRange(lower, upper) {
@@ -99,8 +110,7 @@ function randomRange(lower, upper) {
 
 function randomOption() {
 	let num = randomRange(1, 3);
-	switch (num)
-	{
+	switch (num) {
 		case 1:
 			return "rock";
 		case 2:
@@ -108,7 +118,7 @@ function randomOption() {
 		case 3:
 			return "scissors";
 		default:
-			return "what?";
+			return "what? no way";
 	}
 }
 
@@ -123,4 +133,6 @@ function resetResults() {
 	totalRounds.textContent = '0';
 	tiesScore.textContent = '0';
 	result.textContent = 'Tie';
+	if (typeof announcement !== "undefined")
+		announcement.setAttribute("style", "display: none");
 }
