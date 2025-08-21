@@ -1,0 +1,3 @@
+- refactor the code
+- announce a winner after 5 rounds with a new paragraph(green if player won and red if he lost)
+- 
