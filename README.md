@@ -6,7 +6,6 @@
 <p align="center">
   <a href="https://smailoujaoura.github.io/odin_rock_paper_scissors/"><strong>Live Demo</strong></a>
   &nbsp;|&nbsp;
-  <a href="https://github.com/smailoujaoura/odin_rock_paper_scissors"><strong>Source Code</strong></a>
 </p>
 
 ![Rock Paper Scissors screenshot](./docs/image.png)
